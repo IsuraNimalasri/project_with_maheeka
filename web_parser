@@ -1,0 +1,57 @@
+from bs4 import BeautifulSoup
+import urllib.request, urllib.parse, urllib.error
+
+URL_list = [
+"https://rumble.com/vcmcnl-white-house-responds-to-impeachment-2.0-efforts.html?mref=22lbp&mc=56yab",
+"https://www.inspireuplift.com/In-2021-T-Shirt/iu/1528",
+"https://bongino.com/amazon-bans-parler-from-its-web-hosting-service",
+"https://trib.al/mEyfp03",
+"https://www.dailywire.com/news/article-of-impeachment-against-trump-to-be-introduced-monday-in-house?utm_source=facebook&utm_medium=social&utm_campaign=benshapiro",
+"https://www.foxnews.com/politics/nancy-pelosi-in-60-minutes-interview-slams-trump-as-deranged-calls-for-prosecution",
+"https://rumble.com/vcmmft-rep.-nunes-calls-for-rico-investigaion-into-big-tech.html?mref=ah9c7&mrefc=4",
+"https://www.peachysunday.com/products/i-am-a-multitasker-tee",
+"https://abcnews.go.com/US/blow-trump-golfs-pga-strip-major-championship-trump/story?id=75168540&cid=social_fb_abcn",
+"https://trib.al/sczUZ8K",
+"https://trib.al/4Mx39hy",
+"https://cnn.it/3ozut89",
+"https://www.thedodo.com/protective-duck-looks-after-his-favorite-little-boy-1566651187.html?utm_source=facebook&utm_medium=social&utm_campaign=dodo",
+"https://trib.al/zV7Tar4",
+"https://www.ksby.com/news/california-news/bald-eagle-lays-egg-in-southern-california-mountains",
+"https://www.newsandguts.com/video/arnold-schwarzenegger-compares-hill-attackers-to-nazis/",
+"https://rumble.com/vcmlbv-parler-ceo-speaks-out-after-big-tech-assault.html?mref=22lbp&mc=56yab",
+"https://n.news.naver.com/entertain/article/477/0000280424",
+"https://bit.ly/3q2RiBu",
+"https://www.soompi.com/article/1447922wpp/dispatch-reports-all-got7-members-will-part-ways-with-jyp-entertainment-agency-responds",
+"https://www.washingtonpost.com/education/2021/01/10/thousands-law-school-alumni-students-push-disbarment-sens-hawley-cruz/?utm_source=reddit.com",
+"https://www.newsandguts.com/colin-powell-i-can-no-longer-call-myself-a-fellow-republican/",
+"https://www.foxnews.com/entertainment/arnold-schwarzenegger-trump-failed-leader-worst-president-capitol-riots-statement",
+"https://www.foxnews.com/politics/biden-trump-not-above-law",
+"https://trib.al/MO20Juj",
+"https://trib.al/HYWinvv",
+"http://redstateobserver.com/article.asp?id=179303",
+"https://theconservativeopinion.com/pelosi-confirms-house-democrats-will-move-to-impeach-trump-tomorrow/",
+"https://www.westernjournal.com/defense-officials-confirm-trump-still-commander-chief-refuse-participate-military-coup-oust/?utm_source=facebook&utm_medium=huckabee",
+"https://www.foxnews.com/politics/trump-border-wall-texas-visit-last-full-week-in-office",
+"https://www.breitbart.com/law-and-order/2021/01/10/watch-antifa-in-riot-gear-blm-march-in-nyc-female-journalist-attacked/",
+"https://www.newsweek.com/gop-lawmakers-beg-biden-pelosi-not-impeach-trump-spirit-healing-1560267?utm_medium=Social&utm_source=Facebook#Echobox=1610244341",
+"https://on.wsj.com/3bpl5An",
+"http://dlsh.it/5910t7n",
+"https://i.imgur.com/hSddhmu.gif",
+"https://trib.al/mPZQ07A",
+]
+
+def get_canonical(_list):
+    for url in _list:
+        try:
+            html = urllib.request.urlopen(url).read()
+        except:
+            print("Cannot parse html for " + url)
+            continue
+        soup = BeautifulSoup(html, 'html.parser')
+        try:
+            canonicalURL = soup.find('link', rel = "canonical")['href']
+            print(canonicalURL)
+        except:
+            print("No canonical URL found for " + url)
+
+get_canonical(URL_list)
